@@ -268,8 +268,8 @@ if __name__ == '__main__':
 
         if(not HAS_VALID_FILE):
             print(STRINGS.noFiles)
-            #print(STRINGS.exitMessage)
-            #exit(1)
+            print(STRINGS.exitMessage)
+            exit(1)
 
         choice = input(STRINGS.noProcessedAdvance)
 
