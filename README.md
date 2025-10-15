@@ -29,10 +29,10 @@ This is a small Python script that renames and moves already-downloaded episodes
 ## Important Files
 The following files in the folder are critical for the operation of this script:
 
-- `One Pace Episode Guide - Meta.csv`  
-- `One Pace Episode Guide - Season Sheet.csv`  
-- `onePieceMetaData.json`  
-- `onePieceSeasonData.json`
+- `One Pace Episode Guide - Meta.csv`: Contains the Episode details from official One Pace release.
+- `One Pace Episode Guide - Season Sheet.csv`: Contains the Season details from official One Pace release.
+- `onePieceMetaData.json`: This is the collection of all episodes, their title, summary and release dates.
+- `onePieceSeasonData.json`: This contains the season titles and summaries
 
 ---
 
