@@ -24,7 +24,7 @@ def generateEnv():
     plex_tkn = input(f"Enter your plex token:\t")
     if(plex_address.strip() == ""):
         plex_address = 'http://localhost:32400'
-        
+
     if(not re.match('http://(.*):32400',plex_address)):
         print(f"{RED}{BOLD}Error!{RESET} {plex_address} is not a valid format.")
         print(EXIT_MESSAGE)
@@ -32,7 +32,7 @@ def generateEnv():
     
     content = "PLEX_HOST="+plex_address+"\nPLEX_TKN="+plex_tkn
 
-    run('echo {content} > .env')
+    run(f'echo {content} > .env')
 
 def createVenv():
     print(f"{BLUE}{BOLD}Creating a virtual environment{RESET}")
