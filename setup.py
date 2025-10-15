@@ -22,6 +22,9 @@ def generateEnv():
     print(f"{BLUE}{BOLD}Creating .env file:{RESET}")
     plex_address = input(f"Enter your plex address (default: http://localhost:32400):\t")
     plex_tkn = input(f"Enter your plex token:\t")
+    if(plex_address.strip() == ""):
+        plex_address = 'http://localhost:32400'
+        
     if(not re.match('http://(.*):32400',plex_address)):
         print(f"{RED}{BOLD}Error!{RESET} {plex_address} is not a valid format.")
         print(EXIT_MESSAGE)
