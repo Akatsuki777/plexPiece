@@ -53,7 +53,7 @@ Where `XX` is the season number (prepend a zero if the season number is a single
 There are some helper scripts in Python and JavaScript:
 
 - **`appScript.js`**  
-  This script can be added to a copy of the One Pace Database Google Sheet to extract episode and season info when the script is outdated.
+  This script can be added to a copy of the One Pace Database Google Sheet to extract episode and season info when the data in this script is outdated.
 
 - **`buildSeasonData.js`**  
   Used in the browser JS console to extract all arc/season information (note: the Gaimon Arc is absent and must be added manually).  
