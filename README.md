@@ -69,6 +69,7 @@ There are some helper scripts in Python and JavaScript:
 
 ## Data Sources
 All data used by this script were obtained from publicly available sources.
+Content from Wikipedia, licensed under CC BY-SA 4.0.
 
 ---
 
