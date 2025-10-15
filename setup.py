@@ -29,7 +29,7 @@ def generateEnv():
     
     content = "PLEX_HOST="+plex_address+"\nPLEX_TKN="+plex_tkn
 
-    run('echo content > .env')
+    run('echo {content} > .env')
 
 def createVenv():
     print(f"{BLUE}{BOLD}Creating a virtual environment{RESET}")
