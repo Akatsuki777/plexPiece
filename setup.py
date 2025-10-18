@@ -30,7 +30,7 @@ def generateEnv():
         print(EXIT_MESSAGE)
         exit(1)
     
-    content = "PLEX_HOST="+plex_address+"\nPLEX_TKN="+plex_tkn
+    content = "PLEX_URL="+plex_address+"\nPLEX_TKN="+plex_tkn
 
     run(f'echo "{content}" > .env')
 
