@@ -1,3 +1,5 @@
+#Only has thumbnails till episode 54
+#Thumbnails has not been implemented in main
 import requests
 import json
 import time
