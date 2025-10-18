@@ -55,7 +55,7 @@ def getEpisodes():
     with open('onePieceMetaData.json','r') as f:
         episode_data = json.load(f)
 
-    with open('One Pace Episode Guide - Meta.csv') as f:
+    with open('One Pace Episode Guide - Meta.csv','r') as f:
        
         rePattern = 'One Pace (S\d{2}E\d{2}) - (.*)\.mkv'
         for lines in f.readlines():
@@ -193,7 +193,8 @@ def setupFiles(fileDict):
         os.rename(os.path.join(data['path'],key),os.path.join(os.getcwd(),"Season "+data["season"],getNewEpName(data['season'],data['episode'],data['extension'])))  
 
     for folders in oldFolders:
-        os.rmdir(os.path.join(folders))  
+        if not os.listdir(folders):
+            os.rmdir(os.path.join(folders))  
 
 #Sets metadata to a Plex media object
 def setMetaData(baseObj,data):
