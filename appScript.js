@@ -15,27 +15,24 @@ function extractSeasons(){
   var seasonSheet = ss.getSheetByName("Season Sheet");
   if(!seasonSheet){
     seasonSheet = ss.insertSheet("Season Sheet");
+  } else {
+    seasonSheet.getDataRange().clearContent();
   }
 
-  seasonSheet.getRange(1,1).setValue("Season Number");
-  seasonSheet.getRange(1,2).setValue("Season Name");
-  seasonSheet.getRange(1,3).setValue("Season Status");
-
-  let sRow = 2;
-  let row = 2
+  let sRow = 1;
+  let row = 2;
 
   while(parseFloat(sheet.getRange(row,1).getValue())&&sheet.getRange(row,2).getValue()){
     
-    if(parseFloat(sheet.getRange(row,1).getValue())%1==0){
-      seasonSheet.getRange(sRow,1).setValue(sheet.getRange(row,1).getValue());
-      seasonSheet.getRange(sRow,2).setValue(sheet.getRange(row,2).getValue());
-      let name = sheet.getRange(row,2).getValue();
-      let match = name.match('\\(.*\\)');
-      seasonSheet.getRange(sRow,2).setValue(name.replace(match?match[0]:"",""));
-      seasonSheet.getRange(sRow,3).setValue(match?match[0]:"Completed");
-      sRow++;
-    } 
+    seasonSheet.getRange(sRow,1).setValue(parseInt(sheet.getRange(row,1).getValue()));
+    seasonSheet.getRange(sRow,2).setValue(sheet.getRange(row,2).getValue());
+    let name = sheet.getRange(row,2).getValue();
+    let match = name.match('\\(.*\\)');
+    seasonSheet.getRange(sRow,2).setValue(name.replace(match?match[0]:"",""));
+    seasonSheet.getRange(sRow,3).setValue(match?match[0]:"Completed");
+    sRow++;
     row++;
+
   }
   
 }
@@ -50,15 +47,19 @@ function extractEpisodeName(){
   var metaSheet = ss.getSheetByName("Meta");
   if(!metaSheet){
     metaSheet = ss.insertSheet("Meta");
+  } else {
+    metaSheet.getDataRange().clearContent();
   }
+
   var metaRow = 1;
+  var hasSpecialEpisodes = false;
 
   sheetList.map((sheet)=>{
     let row = 2;
     let seasonNum = getSeason(ss.getSheetByName('Arc Overview'),sheet.getName());
 
     if (seasonNum){
-      while(sheet.getRange(row,2).getValue()!=""){
+      while(sheet.getRange(row,2).getValue()!=""&&sheet.getRange(row,5).getValue()!="To Be Released"){
         let realEpisodes = sheet.getRange(row,4).getValue();
         realEpisodes = [...realEpisodes.matchAll('\\d+')];
         let episodeNum = sheet.getRange(row,2).getValue();
@@ -68,13 +69,6 @@ function extractEpisodeName(){
           episodeNum = parseInt(episodeNum.match('\\d+')[0]);
         } catch(e){
           episodeNum = 1;
-        }
-
-        if(seasonNum%1!=0){
-          seasonNum = Math.floor(seasonNum);
-          episodeNum += curSeasonEpCount;
-        } else {
-          curSeasonEpCount = episodeNum;
         }
         
         switch (realEpisodes.length){
@@ -91,6 +85,16 @@ function extractEpisodeName(){
             })
             realEpisodes=tmpString.slice(0,-1);
         }
+
+        if(seasonNum%1!=0){
+            seasonNum = Math.floor(seasonNum);
+            episodeNum += curSeasonEpCount;
+            logToSpecialSheet(sheet.getRange(row,2).getValue(),"".concat("One Pace - ",getSeasonName(seasonNum,ss.getSheetByName('Arc Overview'))," Episode ",prependZero(episodeNum),'.mkv'),ss,hasSpecialEpisodes);
+            hasSpecialEpisodes = true;
+        } else {
+            curSeasonEpCount = episodeNum;
+        }
+
         metaSheet.getRange(metaRow,1).setValue("".concat("One Pace S",prependZero(seasonNum),"E",prependZero(episodeNum)," - ",realEpisodes+'.mkv'));
         metaRow ++;
         row++;
@@ -98,6 +102,29 @@ function extractEpisodeName(){
     }
   });
 
+}
+
+function getSeasonName(seasonNum,sheet){
+  let textFinder = sheet.getRange(1,1,sheet.getLastRow(),1).createTextFinder(seasonNum);
+  let match = textFinder.findAll();
+
+  if(match.length>0){
+    return sheet.getRange(match[0].getRow(),2).getValue();
+  }
+  return null;
+}
+
+function logToSpecialSheet(value,epName,ss,start){
+  let specialSheet = ss.getSheetByName("SpecialEpisodes");
+  if(!specialSheet){
+    ss.insertSheet("SpecialEpisodes");
+  } 
+  if(!start){
+    specialSheet.getDataRange().clearContent();
+  }
+  let rowNum = specialSheet.getLastRow()+1;
+  specialSheet.getRange(rowNum,1).setValue(value);
+  specialSheet.getRange(rowNum,2).setValue(epName);
 }
 
 function getSeason(sheet,seasonName){
