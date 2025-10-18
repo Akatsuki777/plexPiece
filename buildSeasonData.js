@@ -1,3 +1,4 @@
+//This is from One Piece Wiki.
 var els = document.querySelectorAll("h4");
 const seasonList = ['Romance Dawn', 'Orange Town', 'Syrup Village', 'Baratie', 'Arlong Park', 'Loguetown', 'Reverse Mountain', 'Whisky Peak ', 'Little Garden', 'Drum Island', 'Arabasta', 'Jaya', 'Skypiea', 'Long Ring Long Land ', 'Water Seven', 'Enies Lobby', 'Post-Enies Lobby ', 'Thriller Bark  ', 'Sabaody Archipelago ', 'Amazon Lily ', 'Impel Down ', 'Marineford', 'Post-War', 'Return to Sabaody', 'Fishman Island ', 'Punk Hazard ', 'Dressrosa ', 'Zou ', 'Whole Cake Island', 'Reverie', 'Wano ', 'Egghead '];
 
