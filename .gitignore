@@ -1,3 +1,6 @@
 .DS_Store
 One_Piece_Cover_Images/.DS_Store
 scrapeSeasonCovers.js
+venv/*
+.env
+.vscode/*
