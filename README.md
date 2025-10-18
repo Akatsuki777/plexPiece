@@ -19,10 +19,21 @@ This is a small Python script that renames and moves already-downloaded episodes
    ```
    Enter the Plex Host and Plex Token when prompted.
 
-3. Run the metadata script:
-   ```bash
-   python3 makeMetaData.py
-   ```
+ 3. Run the Metadata Script:
+
+      Run the script normally with:
+   
+      ```bash
+      python3 makeMetaData.py
+      ```
+      
+      > **Note:** If you encounter read/write permission errors in the folder, run the script with elevated permissions:
+      
+      ```bash
+      sudo -E venv/bin/python3 makeMetaData.py
+      ```
+
+
 
 ---
 
@@ -64,6 +75,9 @@ There are some helper scripts in Python and JavaScript:
 
 - **`getEpisodeThumbnails.py`**  
   For an additional feature that is not yet implemented. It pulls available episode thumbnails from the Kitsu API. The data are incomplete (only 53 thumbnails available).
+
+- **`findMissingEps.py`**  
+  Displays the episodes that are missing from the existing One Piece library in Plex.
 
 ---
 
