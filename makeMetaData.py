@@ -57,7 +57,7 @@ def getEpisodes():
 
     with open('One Pace Episode Guide - Meta.csv','r') as f:
        
-        rePattern = 'One Pace (S\d{2}E\d{2}) - (.*)\.mkv'
+        rePattern = r'One Pace (S\d{2}E\d{2}) - (.*)\.mkv'
         for lines in f.readlines():
 
             match = re.match(rePattern,lines)
@@ -269,8 +269,6 @@ if __name__ == '__main__':
 
         if(not HAS_VALID_FILE):
             print(STRINGS.noFiles)
-            print(STRINGS.exitMessage)
-            exit(1)
 
         choice = input(STRINGS.noProcessedAdvance)
 
